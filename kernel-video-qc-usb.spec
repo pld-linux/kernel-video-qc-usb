@@ -9,11 +9,11 @@
 %ifarch sparc
 %undefine with_smp
 %endif
+%define	_rel	1
 Summary:	Kernel module for Logitech QuickCam USB cameras (new)
 Summary(pl):	Modu³ j±dra do kamer USB Logitech QuickCam (nowy)
 Name:		kernel-video-qc-usb
 Version:	0.6.3
-%define	_rel	1
 Release:	%{_rel}@%{_kernel_ver_str}
 License:	GPL
 Group:		Base/Kernel
@@ -21,7 +21,7 @@ Source0:	http://dl.sourceforge.net/qce-ga/qc-usb-%{version}.tar.gz
 # Source0-md5:	3d33380a29a7f92c4eef1f82d61b4ee0
 URL:		http://qce-ga.sourceforge.net/
 %if %{with kernel} && %{with dist_kernel}
-BuildRequires:	kernel-module-build >= 2.6}
+BuildRequires:	kernel-module-build >= 3:2.6}
 %endif
 BuildRequires:	rpmbuild(macros) >= 1.118
 %if %{with kernel} && %{with dist_kernel}
@@ -71,14 +71,14 @@ Dokumentacja i program testuj±cy do kamer Logitech QuickCam USB.
 %if %{with kernel}
 %if %{with dist_kernel} && %{with smp}
 %{__make} all \
-        CC="%{kgcc}" \
-        INCLUDES="%{rpmcflags} -I. -D__KERNEL_SMP=1 -D__SMP__ -I%{_kernelsrcdir}/include"
+		CC="%{kgcc}" \
+		INCLUDES="%{rpmcflags} -I. -D__KERNEL_SMP=1 -D__SMP__ -I%{_kernelsrcdir}/include"
 mv -f quickcam.ko  quickcam-smp.ko
 #%%{__make} clean
 %endif
 %{__make} all \
-        CC="%{kgcc}" \
-        INCLUDES="%{rpmcflags} -I.  -I%{_kernelsrcdir}/include"
+		CC="%{kgcc}" \
+		INCLUDES="%{rpmcflags} -I.  -I%{_kernelsrcdir}/include"
 %endif
 
 %if %{with userspace}
