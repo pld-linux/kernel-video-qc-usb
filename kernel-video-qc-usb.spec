@@ -50,11 +50,6 @@ Dokumentacja i program testujący do kamer Logitech QuickCam USB.
 %setup -q -n qc-usb-%{version}
 
 %build
-#%%if %{with kernel}
-#%{__make} all \
-#		CC="%{kgcc}" \
-#		INCLUDES="%{rpmcflags} -I. -D__KERNEL_SMP=1 -D__SMP__ -I%{_kernelsrcdir}/include"
-#%%endif
 %build_kernel_modules -m quickcam
 
 %if %{with userspace}
